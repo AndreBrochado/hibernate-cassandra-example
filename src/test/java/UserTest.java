@@ -1,51 +1,22 @@
-/*
- * Hibernate OGM, Domain model persistence for NoSQL datastores
- *
- * License: GNU Lesser General Public License (LGPL), version 2.1 or later
- * See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
- */
-
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
-
-import javax.annotation.Resource;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 
 import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileWriter;
-import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericDatumWriter;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.DatumWriter;
-import org.apache.avro.specific.SpecificDatumWriter;
 
 import org.hibernate.*;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.context.spi.CurrentSessionContext;
 import org.hibernate.ogm.cfg.OgmConfiguration;
-import org.hibernate.ogm.exception.impl.Exceptions;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- * Shows how to persist and retrieve entities to/from NoSQL stores using Hibernate OGM.
- *
- * @author Gunnar Morling
- */
 public class UserTest {
 
     private static SessionFactory sessionFactory;
@@ -54,16 +25,8 @@ public class UserTest {
     @BeforeClass
     public static void setUpEntityManagerFactory() {
         try {
-//        HOGMDao dd = new HOGMDao();
-//        OgmConfiguration cfgogm = dd.hogmdao( "userbase" );
-//        cfgogm.addAnnotatedClass( User.class );
-//        cfgogm.addResource("user.hbm.xml");
-
-//        StandardServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings( cfgogm.getProperties() ).build();
-
-            Configuration c = new Configuration();
+            Configuration c = new OgmConfiguration();
             c.configure();
-//            sessionFactory = cfgogm.buildSessionFactory( registry );
             sessionFactory = c.buildSessionFactory();
         }catch (Throwable e){
             e.printStackTrace();
@@ -163,31 +126,5 @@ public class UserTest {
             e.printStackTrace();
         }
     }
-
-   /* @Test
-    public void simpleQuery(){
-       Session cs = null;
-       try {
-           cs = sessionFactory.openSession();
-           Transaction tx = cs.beginTransaction();
-
-           User bob = new User("Bob", 7, "blue");
-           System.out.println(bob);
-           cs.persist(bob);
-
-           //@SuppressWarnings("unchecked")
-           //List<User> list = cs.createSQLQuery("SELECT * FROM \"User\"").list();
-
-           tx.commit();
-
-//           for ( User user : list ) {
-//               System.out.println( "Student_Id : " + user.getId() );
-//               System.out.println( "Student Name : " + user.getName() );
-//           }
-       }
-       finally {
-           cs.close();
-       }
-   }*/
 
 }
