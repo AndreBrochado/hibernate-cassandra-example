@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="User" table="User" >
+        <id name="id" type="string" column="id" >
+            <generator class="org.hibernate.id.UUIDGenerator" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="16" not-null="false" />
+        </property>
+
+        <property name="favouriteNumber" type="int">
+            <column name="favourite_number" length="16" not-null="false" />
+        </property>
+
+        <property name="favouriteColour" type="string">
+            <column name="favourite_colour" length="16" not-null="false" />
+        </property>
+    </class>
+</hibernate-mapping>
