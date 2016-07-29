@@ -11,6 +11,8 @@ import org.apache.avro.io.DatumWriter;
 
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.event.service.spi.EventListenerRegistry;
+import org.hibernate.event.spi.EventType;
 import org.hibernate.ogm.cfg.OgmConfiguration;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -46,8 +48,9 @@ public class UserTest {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
 
-        // create a User
-        User bob = new User("Bob", 42, "Octarine");
+        // create a User - null id so
+        User bob = new User(null, "Bob", 42, "Octarine");
+        System.out.println(bob.getId());
         // persist User
         session.persist(bob);
         tx.commit();
@@ -56,6 +59,7 @@ public class UserTest {
 
         session = sessionFactory.openSession();
         tx = session.beginTransaction();
+        //System.out.println(bob.getId());
 
         User loadedUser = session.get(User.class, bob.getId());
         assertNotEquals(null, loadedUser);
