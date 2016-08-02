@@ -10,7 +10,7 @@
 
         <!-- properties -->
         <property name="hibernate.ogm.datastore.provider">cassandra_experimental</property>
-        <property name="hibernate.ogm.datastore.host">192.168.0.210:9042</property>
+        <property name="hibernate.ogm.datastore.host">192.168.0.207:9042</property>
         <property name="hibernate.ogm.datastore.database">test</property>
 
         <property name="hibernate.search.default.directory_provider">ram</property>

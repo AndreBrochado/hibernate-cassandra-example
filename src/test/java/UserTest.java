@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class UserTest {
         tx = session.beginTransaction();
         //System.out.println(bob.getId());
 
-        User loadedUser = session.get(User.class, bob.getId());
+        User loadedUser = session.get(User.class, (Serializable) bob.getId());
         assertNotEquals(null, loadedUser);
         assertEquals(loadedUser.getName(), bob.getName());
         assertEquals(loadedUser.getFavouriteColour(), bob.getFavouriteColour());
@@ -86,33 +87,36 @@ public class UserTest {
         session.close();
         assertFalse(listUsers.isEmpty());
 
-        Schema schema = null;
-        try {
-            schema = new Schema.Parser().parse(new File("user.avsc"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        Schema schema = null;
+//        try {
+//            schema = new Schema.Parser().parse(new File("user.avsc"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        File file = new File("users.avro");
-        DatumWriter<GenericRecord> datumWriter = new GenericDatumWriter<GenericRecord>(schema);
-        DataFileWriter<GenericRecord> dataFileWriter = new DataFileWriter<GenericRecord>(datumWriter);
-        try {
-            dataFileWriter.create(schema, file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        File file = new File("users.avro");
+//        DatumWriter<GenericRecord> datumWriter = new GenericDatumWriter<GenericRecord>(schema);
+//        DataFileWriter<GenericRecord> dataFileWriter = new DataFileWriter<GenericRecord>(datumWriter);
+//        try {
+//            dataFileWriter.create(schema, file);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         for (Object u: listUsers) {
-            if(!(u instanceof User)){
-                for(Field field : u.getClass().getDeclaredFields()) {
-                    field.setAccessible(true);
-                    try {
-                        System.out.println(field.getName() + " = " + field.get(u));
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
+            if ((u instanceof User)) {
+//                for (Field field : u.getClass().getDeclaredFields()) {
+//                    field.setAccessible(true);
+//                    try {
+//                        System.out.println(field.getName() + " = " + field.get(u));
+                        System.out.println(u);
+//                    } catch (IllegalAccessException e) {
+//                        e.printStackTrace();
+//                    }
                 }
-                System.exit(1);
-            }
+//            }
+            else
+                fail("Didn't get User Object types");
+        }
 //            GenericRecord g = new GenericData.Record(schema);
 //            g.put("id", ((User)u).getId());
 //            g.put("name", ((User)u).getName());
@@ -123,12 +127,12 @@ public class UserTest {
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
-        }
-        try {
-            dataFileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        }
+//        try {
+//            dataFileWriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
 }

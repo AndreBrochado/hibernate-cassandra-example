@@ -3,8 +3,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.ogm.cfg.OgmConfiguration;
 import org.hibernate.ogm.cfg.OgmProperties;
 import org.hibernate.ogm.datastore.impl.AvailableDatastoreProvider;
-import org.hibernate.result.Output;
-import org.hibernate.search.cfg.Environment;
+//import org.hibernate.result.Output;
+//import org.hibernate.search.cfg.Environment;
 
 import java.io.*;
 
