@@ -41,17 +41,29 @@
             <version>5.0.1.Final</version>
         </dependency>
         <dependency>
+            <groupId>org.hibernate.hql</groupId>
+            <artifactId>hibernate-hql-lucene</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-search-orm</artifactId>
             <version>5.5.4.Final</version>
         </dependency>
-        <!--**********HIBERNATE STUFF**********-->
+        <!--**********/HIBERNATE STUFF**********-->
 
+        <!--**********STEP 2**********-->
         <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
             <version>1.8.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>3.6.4</version>
+        </dependency>
+        <!--**********/STEP 2**********-->
 
         <!--**********TESTING**********-->
         <dependency>
@@ -60,6 +72,7 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <!--**********/TESTING**********-->
 
 
     </dependencies>

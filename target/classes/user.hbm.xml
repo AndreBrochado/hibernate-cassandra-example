@@ -4,11 +4,11 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="User" table="User" >
-        <id name="id" type="string" column="id" >
+    <class name="testpkg.User" table="User">
+        <id name="id" type="string" column="id">
             <generator class="org.hibernate.id.UUIDGenerator" />
         </id>
-        <property name="name" type="string">
+        <property name="name" type="string" >
             <column name="name" length="16" not-null="false" />
         </property>
 
