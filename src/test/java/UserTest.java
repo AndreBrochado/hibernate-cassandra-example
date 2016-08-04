@@ -4,6 +4,8 @@ import java.util.List;
 
 
 import testpkg.User;
+
+import org.fest.assertions.Assertions;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.ogm.cfg.OgmConfiguration;
@@ -76,23 +78,18 @@ public class UserTest {
 
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
+        User newUser = new User( null, "Threeflower", 9, "Octarine 3" );
+        session.persist( newUser );
+        tx.commit();
+        session.clear();
 
-       // Query q = session.createSQLQuery("select  *  from \"User\"").addEntity(testpkg.User.class);
+        tx = session.beginTransaction();
         Query q = session.createQuery("FROM User");
-//        Query
-
-        @SuppressWarnings("unchecked")
         List listUsers = q.list();
         tx.commit();
         session.close();
+
         assertFalse(listUsers.isEmpty());
-
-//        for (User u: listUsers) {
-//            if(u != null)
-//                System.out.println(u);
-//            else
-//                fail("Didn't get testpkg.User Object types");
-//        }
+        Assertions.assertThat( listUsers ).onProperty( "name" ).contains( newUser.getName() );
     }
-
 }
